@@ -1,0 +1,91 @@
+# Publishes Witney's Best to GitHub Pages every time something is saved.
+# Before publishing, it shrinks any new photo to a sensible size for the web
+# (1,600 pixels on its longest side), turns it the right way up, and removes
+# hidden photo data such as the GPS location your phone records.
+
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: publish-site
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main   # always the latest version, including photos already shrunk
+
+      - name: Install image tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq python3-pil > /dev/null
+
+      - name: Shrink photos
+        shell: python3 {0}
+        run: |
+          import os
+          from PIL import Image, ImageOps
+
+          MAX_EDGE = 1600          # longest side, in pixels
+          MAX_BYTES = 700 * 1024   # anything bigger than this gets recompressed
+          EXTS = {".jpg", ".jpeg", ".png", ".webp"}
+
+          for root, _, files in os.walk("photos"):
+              for name in files:
+                  path = os.path.join(root, name)
+                  ext = os.path.splitext(name)[1].lower()
+                  if ext not in EXTS:
+                      continue
+                  try:
+                      with Image.open(path) as im:
+                          too_big = max(im.size) > MAX_EDGE or (ext != ".png" and os.path.getsize(path) > MAX_BYTES)
+                          has_exif = len(im.getexif()) > 0
+                          if not (too_big or has_exif):
+                              continue
+                          before = os.path.getsize(path)
+                          im = ImageOps.exif_transpose(im)
+                          im.thumbnail((MAX_EDGE, MAX_EDGE), Image.LANCZOS)
+                          if ext in (".jpg", ".jpeg"):
+                              im.convert("RGB").save(path, "JPEG", quality=82, optimize=True, progressive=True)
+                          elif ext == ".webp":
+                              im.save(path, "WEBP", quality=80, method=6)
+                          else:
+                              im.save(path, "PNG", optimize=True)
+                      print(f"{path}: {before // 1024} KB -> {os.path.getsize(path) // 1024} KB")
+                  except Exception as err:
+                      print(f"Skipped {path}: {err}")
+
+      - name: Save the smaller photos back to the repository
+        run: |
+          if [ -n "$(git status --porcelain -- photos)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add photos
+            git commit -m "Shrink uploaded photos"
+            git pull --rebase
+            git push
+          else
+            echo "No photos needed shrinking."
+          fi
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+
+      - id: deployment
+        uses: actions/deploy-pages@v5
