@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Witney's Best</title>
+<meta name="description" content="An ongoing, personal celebration of standout things in Witney, discovered one by one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;0,9..144,750;1,9..144,400;1,9..144,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF7F0;
+    --paper:#FFFFFF;
+    --ink:#1F211C;
+    --ink-soft:#4A4D45;
+    --muted:#7A7C72;
+    --green:#2F5E35;
+    --green-deep:#244A29;
+    --green-mid:#4E7E4B;
+    --sage:#E6ECDC;
+    --sage-2:#D7E1CA;
+    --line:#E4DED2;
+    --stone:#D8C39A;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(40,35,20,.05), 0 6px 22px rgba(40,35,20,.07);
+    --shadow-hover:0 2px 4px rgba(40,35,20,.06), 0 14px 34px rgba(40,35,20,.12);
+    --serif:"Fraunces", Georgia, "Times New Roman", serif;
+    --sans:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  button{font:inherit;color:inherit}
+  a{color:var(--green)}
+  :focus-visible{outline:3px solid #9BB98F;outline-offset:2px;border-radius:6px}
+
+  /* ---------- Header / hero ---------- */
+  .hero{position:relative;overflow:hidden;padding:18px 20px 34px}
+  .topbar{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;max-width:1160px;margin:0 auto}
+  .icon-btn{width:44px;height:44px;display:grid;place-items:center;border:0;background:transparent;border-radius:12px;cursor:pointer;color:var(--ink)}
+  .icon-btn:hover{background:rgba(47,94,53,.08)}
+  @media (max-width:640px){#menuBtn{background:rgba(251,247,240,.82)}}
+  .icon-btn svg{width:26px;height:26px}
+
+  .branch{position:absolute;left:-30px;top:-20px;width:260px;height:auto;z-index:1;pointer-events:none}
+  .cottage{position:absolute;right:-40px;top:70px;width:280px;height:auto;z-index:1;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent 98%);mask-image:linear-gradient(to bottom,#000 62%,transparent 98%)}
+
+  .masthead{position:relative;z-index:2;text-align:center;max-width:620px;margin:-26px auto 0}
+  .skyline{display:block;width:200px;height:auto;margin:0 auto 6px;color:var(--green)}
+  h1{font-family:var(--serif);font-weight:750;font-size:clamp(2.6rem,7.2vw,4.2rem);line-height:1.02;letter-spacing:-.02em;margin:0;font-variation-settings:"opsz" 120}
+  .h1-wrap{position:relative;display:inline-block}
+  .h1-wrap .spark{position:absolute;right:-30px;top:-12px;width:30px;color:var(--green-mid)}
+  .tagline{display:flex;align-items:center;justify-content:center;gap:14px;margin:10px 0 18px;font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.6vw,1.4rem);color:var(--green)}
+  .tagline::before,.tagline::after{content:"";height:1.5px;width:56px;background:var(--green-mid);opacity:.7}
+  .intro{font-family:var(--serif);font-size:clamp(1.05rem,2.2vw,1.2rem);line-height:1.5;color:var(--ink-soft);margin:0 auto;max-width:31em;font-variation-settings:"opsz" 14}
+  .swoosh{width:84px;margin:12px auto 0;color:var(--green)}
+
+  /* ---------- Search + filters ---------- */
+  .controls{position:sticky;top:0;z-index:20;background:rgba(251,247,240,.92);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);padding:12px 0 10px;border-bottom:1px solid transparent;transition:border-color .2s}
+  .controls.stuck{border-bottom-color:var(--line)}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+  .search{position:relative;max-width:840px;margin:0 auto}
+  .search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:22px;height:22px;color:var(--ink);pointer-events:none}
+  .search input{width:100%;height:54px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);padding:0 48px 0 54px;font:inherit;font-size:17px;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.03);-webkit-appearance:none;appearance:none}
+  .search input::placeholder{color:#8B8C84}
+  .search input:focus{outline:none;border-color:var(--green-mid);box-shadow:0 0 0 4px rgba(78,126,75,.15)}
+  .clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:none;place-items:center;color:var(--muted)}
+  .clear.show{display:grid}
+  .clear:hover{background:var(--sage)}
+  .chips{display:flex;gap:10px;margin:14px auto 0;max-width:840px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 4px;-webkit-overflow-scrolling:touch}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;border:0;cursor:pointer;background:var(--sage);color:var(--ink);font-size:16.5px;font-weight:500;padding:10px 22px;border-radius:999px;transition:background .15s,color .15s,transform .1s}
+  .chip:hover{background:var(--sage-2)}
+  .chip:active{transform:scale(.97)}
+  .chip[aria-pressed="true"]{background:var(--green);color:#fff}
+  .chip .n{opacity:.6;font-size:.85em;margin-left:6px;font-variant-numeric:tabular-nums}
+
+  /* ---------- Awards ---------- */
+  main{padding:18px 0 40px}
+  .status{max-width:840px;margin:0 auto 14px;color:var(--muted);font-size:15px;min-height:1.5em}
+  .grid{display:grid;grid-template-columns:1fr;gap:18px;max-width:840px;margin:0 auto}
+  @media (min-width:1000px){
+    .grid,.status{max-width:none}
+    .grid{grid-template-columns:1fr 1fr;gap:22px}
+  }
+  .card{display:grid;grid-template-columns:minmax(0,43%) minmax(0,1fr);background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;text-decoration:none;color:inherit;transition:box-shadow .2s,transform .2s;min-height:200px;animation:rise .45s both}
+  .card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+  .card:hover .photo img{transform:scale(1.04)}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .photo{position:relative;overflow:hidden;background:var(--sage)}
+  .photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .ph{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:8px;background:radial-gradient(circle at 50% 40%,#F1F4EA,#DCE5D0);color:var(--green)}
+  .ph svg{width:64px;height:64px;opacity:.85}
+  .ph span{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--green-mid)}
+  .body{padding:20px 22px 18px 18px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px;align-content:start}
+  .laurel{width:34px;height:34px;color:var(--green);margin-top:2px}
+  .body h2{font-family:var(--serif);font-weight:650;font-size:clamp(1.3rem,3.2vw,1.55rem);line-height:1.15;letter-spacing:-.01em;margin:0;font-variation-settings:"opsz" 36}
+  .winner{grid-column:2;margin:6px 0 0;font-family:var(--serif);font-weight:500;color:var(--green);font-size:1.12rem;line-height:1.25}
+  .blurb{grid-column:2;margin:8px 0 0;color:var(--ink-soft);font-size:16.5px;line-height:1.45}
+  .meta{grid-column:2;margin-top:14px;padding-top:10px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink-soft);display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .meta .cat{font-family:var(--sans);font-style:normal;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green-mid)}
+
+  @media (max-width:560px){
+    body{font-size:16px}
+    .card{grid-template-columns:minmax(0,38%) minmax(0,1fr);min-height:0}
+    .body{padding:14px 14px 12px 13px;column-gap:6px}
+    .laurel{width:24px;height:24px;margin-top:0}
+    .body h2{font-size:1.18rem}
+    .winner,.blurb,.meta{grid-column:1/-1}
+    .winner{font-size:1rem;margin-top:5px}
+    .blurb{font-size:15px;margin-top:5px}
+    .meta{font-size:13.5px;margin-top:10px;padding-top:8px}
+    .search input{font-size:16px;padding-right:40px}
+    .search input::placeholder{font-size:15px}
+    .meta .cat{display:none}
+  }
+  @media (max-width:370px){
+    .card{grid-template-columns:1fr}
+    .photo{aspect-ratio:16/10}
+  }
+
+  .empty{grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--ink-soft)}
+  .empty svg{width:72px;height:72px;color:var(--sage-2);margin:0 auto 10px}
+  .empty h3{font-family:var(--serif);font-weight:650;font-size:1.4rem;margin:0 0 6px;color:var(--ink)}
+  .empty p{margin:0}
+  .linkish{background:none;border:0;padding:0;color:var(--green);text-decoration:underline;cursor:pointer;font:inherit}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--line);padding:34px 20px 44px;text-align:center;color:var(--ink-soft)}
+  footer .skyline{width:150px;opacity:.85}
+  footer p{max-width:34em;margin:8px auto 0;font-family:var(--serif);font-size:16px}
+  footer small{display:block;margin-top:14px;color:var(--muted);font-size:13.5px}
+
+  /* ---------- Detail panel ---------- */
+  .overlay{position:fixed;inset:0;z-index:50;background:rgba(28,30,24,.55);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .2s}
+  .overlay.open{display:flex}
+  .overlay.show{opacity:1}
+  .panel{position:relative;background:var(--paper);border-radius:20px;max-width:640px;width:100%;max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.3);transform:translateY(12px) scale(.98);transition:transform .25s}
+  .overlay.show .panel{transform:none}
+  .panel .hero-img{aspect-ratio:16/9;background:var(--sage);position:relative;overflow:hidden}
+  .panel .hero-img img{width:100%;height:100%;object-fit:cover}
+  .panel .content{padding:24px 28px 30px}
+  .panel .eyebrow{display:flex;align-items:center;gap:10px;color:var(--green-mid);font-size:13px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+  .panel .eyebrow svg{width:28px;height:28px;color:var(--green)}
+  .panel h2{font-family:var(--serif);font-weight:750;font-size:clamp(1.7rem,4.5vw,2.2rem);line-height:1.08;letter-spacing:-.015em;margin:10px 0 6px}
+  .panel .winner{margin:0;font-size:1.3rem}
+  .panel .story{margin:16px 0 0;font-family:var(--serif);font-size:1.12rem;line-height:1.6;color:var(--ink-soft);font-variation-settings:"opsz" 14}
+  .panel dl{margin:20px 0 0;padding-top:14px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:15.5px}
+  .panel dt{color:var(--muted)}
+  .panel dd{margin:0}
+  .close{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.92);box-shadow:0 2px 10px rgba(0,0,0,.15);cursor:pointer;display:grid;place-items:center;z-index:2}
+  .close svg{width:20px;height:20px}
+  .about h2{margin-top:4px}
+  .about p{font-family:var(--serif);font-size:1.08rem;line-height:1.6;color:var(--ink-soft);margin:12px 0 0}
+
+  /* ---------- Responsive hero ---------- */
+  @media (min-width:1100px){
+    .branch{width:320px;left:-10px}
+    .cottage{width:320px;right:-10px;top:64px}
+  }
+  @media (max-width:860px){
+    .cottage{width:200px;right:-70px;top:80px;opacity:.9}
+    .branch{width:190px;left:-50px}
+  }
+  @media (max-width:640px){
+    .hero{padding:10px 16px 22px}
+    .branch{width:150px;left:-38px;top:-22px;opacity:.9}
+    .cottage{display:none}
+    .masthead{margin-top:-30px;padding:0 6px}
+    .skyline{width:150px}
+    .tagline::before,.tagline::after{width:28px}
+    .h1-wrap .spark{right:-20px;width:22px}
+    .wrap{padding:0 16px}
+    .search input{height:50px;font-size:16px}
+    .chip{padding:9px 18px;font-size:15.5px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="branch" id="branch" viewBox="0 0 300 300" aria-hidden="true"></svg>
+  <svg class="cottage" viewBox="0 0 360 300" aria-hidden="true">
+    <defs>
+      <pattern id="stones" width="28" height="14" patternUnits="userSpaceOnUse">
+        <rect width="28" height="14" fill="#D9C39A"/>
+        <path d="M0 13.5H28M14 0V7M0 7H28M4 7v7M22 7v7" stroke="#C4AC80" stroke-width="1" fill="none" opacity=".75"/>
+      </pattern>
+      <linearGradient id="fadeL" x1="0" x2="1">
+        <stop offset="0" stop-color="#FBF7F0" stop-opacity="1"/>
+        <stop offset=".22" stop-color="#FBF7F0" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="fadeB" x1="0" y1="0" x2="0" y2="1">
+        <stop offset=".72" stop-color="#FBF7F0" stop-opacity="0"/>
+        <stop offset="1" stop-color="#FBF7F0" stop-opacity="1"/>
+      </linearGradient>
+    </defs>
+    <!-- chimney -->
+    <rect x="236" y="8" width="34" height="62" fill="url(#stones)"/>
+    <rect x="232" y="4" width="42" height="8" fill="#BFA77B"/>
+    <rect x="240" y="-6" width="10" height="12" fill="#A87A5A"/><rect x="256" y="-6" width="10" height="12" fill="#A87A5A"/>
+    <!-- roof -->
+    <path d="M70 120 L200 30 L380 30 L380 120 Z" fill="#8A8476"/>
+    <path d="M70 120 L200 30 L330 120 Z" fill="#9A9486"/>
+    <g stroke="#7B7568" stroke-width="1" opacity=".6">
+      <path d="M95 103H305M120 86H281M145 69H256M170 52H232"/>
+    </g>
+    <!-- gable wall -->
+    <path d="M86 120 L200 42 L314 120 L314 310 L86 310 Z" fill="url(#stones)"/>
+    <path d="M314 120 L380 120 L380 310 L314 310Z" fill="url(#stones)" opacity=".85"/>
+    <path d="M80 122 L200 38 L320 122" fill="none" stroke="#C9B286" stroke-width="7" stroke-linejoin="round"/>
+    <!-- windows -->
+    <g>
+      <rect x="168" y="80" width="64" height="40" fill="#EDE6D6" stroke="#B9A076" stroke-width="5"/>
+      <path d="M200 80V120M168 100H232" stroke="#F8F5EE" stroke-width="3"/>
+      <rect x="120" y="150" width="56" height="78" fill="#EDE6D6" stroke="#B9A076" stroke-width="5"/>
+      <path d="M148 150V228M120 176H176M120 202H176" stroke="#FFFFFF" stroke-width="3"/>
+      <rect x="226" y="150" width="56" height="78" fill="#EDE6D6" stroke="#B9A076" stroke-width="5"/>
+      <path d="M254 150V228M226 176H282M226 202H282" stroke="#FFFFFF" stroke-width="3"/>
+      <rect x="326" y="150" width="46" height="78" fill="#EDE6D6" stroke="#B9A076" stroke-width="5"/>
+      <path d="M349 150V228M326 189H372" stroke="#FFFFFF" stroke-width="3"/>
+      <rect x="114" y="228" width="68" height="7" fill="#C9B286"/><rect x="220" y="228" width="68" height="7" fill="#C9B286"/>
+    </g>
+    <!-- ivy -->
+    <g fill="#5E8B54">
+      <circle cx="96" cy="250" r="7"/><circle cx="104" cy="262" r="8"/><circle cx="92" cy="272" r="7"/><circle cx="106" cy="282" r="9"/><circle cx="96" cy="292" r="8"/>
+      <circle cx="112" cy="244" r="5" fill="#7AA36C"/><circle cx="88" cy="258" r="5" fill="#7AA36C"/>
+    </g>
+  </svg>
+
+  <div class="topbar">
+    <button class="icon-btn" id="menuBtn" aria-label="About Witney's Best">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <button class="icon-btn" id="searchBtn" aria-label="Search awards">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+    </button>
+  </div>
+
+  <div class="masthead">
+    <svg class="skyline" viewBox="0 0 220 76" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+      <!-- trees -->
+      <g fill="#DCE6D0"><path d="M18 70c-9 0-14-7-11-15-5-6 0-15 7-15 1-8 13-10 17-3 8-1 12 8 8 14 4 7-2 16-10 15"/><path d="M200 70c9 0 14-7 11-15 5-6 0-15-7-15-1-8-13-10-17-3-8-1-12 8-8 14-4 7 2 16 10 15"/></g>
+      <path d="M22 70V58M196 70V58"/>
+      <!-- houses left -->
+      <g fill="#EEF2E7">
+        <path d="M38 70V46l13-12 13 12v24"/>
+        <path d="M64 70V50h22v20"/><path d="M62 50l13-10 13 10"/>
+        <path d="M86 70V44l9-9 9 9v26"/>
+      </g>
+      <path d="M44 52h5v6h-5zM54 52h5v6h-5zM44 62h5v5h-5zM70 56h5v5h-5zM78 56h4v5h-4zM92 50h5v6h-5zM92 60h5v10"/>
+      <!-- church -->
+      <g fill="#EEF2E7"><path d="M104 70V34h14v36"/><path d="M104 34l7-6 7 6"/><path d="M111 28V4"/></g>
+      <path d="M111 4l-3 6M111 4l3 6M108 18h6M109 42h4v7h-4zM107 58h8v12"/>
+      <g fill="#EEF2E7"><path d="M118 70V48h18v22"/><path d="M116 48l11-9 11 9"/></g>
+      <!-- houses right -->
+      <g fill="#EEF2E7">
+        <path d="M136 70V44l11-10 11 10v26"/>
+        <path d="M158 70V50h24v20"/><path d="M156 50l14-10 14 10"/>
+      </g>
+      <path d="M122 54h5v6h-5zM130 54h3v6M141 50h5v6h-5zM141 60h5v10M163 56h5v5h-5zM172 56h5v5h-5zM166 47v-6M176 47v-6"/>
+      <path d="M2 70.5h216" stroke-width="2"/>
+    </svg>
+    <div class="h1-wrap">
+      <h1>Witney's Best</h1>
+      <svg class="spark" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 12 4 4M13 13l6-8M15 20l9-2"/></svg>
+    </div>
+    <p class="tagline">Celebrating local favourites</p>
+    <p class="intro">An ongoing, personal celebration of standout things in Witney, discovered one by one — from brilliant food and drink to charming spaces and independent gems.</p>
+    <svg class="swoosh" viewBox="0 0 90 10" aria-hidden="true"><path d="M3 7C25 2 60 1 87 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+  </div>
+</header>
+
+<div class="controls" id="controls">
+  <div class="wrap">
+    <div class="search" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+      <input id="q" type="search" placeholder="Search awards, businesses or categories…" aria-label="Search awards, businesses or categories" autocomplete="off">
+      <button class="clear" id="clearQ" aria-label="Clear search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="chips" id="chips" role="toolbar" aria-label="Filter by category"></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <p class="status" id="status" aria-live="polite"></p>
+  <section class="grid" id="grid" aria-label="Awards"></section>
+</main>
+
+<footer>
+  <svg class="skyline" viewBox="0 0 220 76" aria-hidden="true" style="color:var(--green)"><use href="#none"/></svg>
+  <p>Witney's Best is an independent, unofficial celebration. No sponsorship, no fees, no entry forms — just good things, found one at a time.</p>
+  <small id="footnote"></small>
+</footer>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" id="panel"></div>
+</div>
+
+<script>
+/* Witney's Best
+   The awards themselves live in data/awards.json and are edited through Pages CMS.
+   CATEGORY_ORDER sets the filter buttons and their order. A category used by an award
+   but missing here still gets a button automatically. */
+var CATEGORY_ORDER = ["Food", "Drink", "Interiors", "Sweet", "Outdoor"];
+
+function startWitneysBest(){
+  "use strict";
+
+  /* ---------- Icons ---------- */
+  function laurelSVG(cls){
+    // Laurel wreath: two arcs of paired leaves rising from the bottom
+    var leaf = "M0 0C3-3.4 8.5-3.4 12 0C8.5 3.4 3 3.4 0 0Z";
+    var cx = 32, cy = 30, r = 23, out = "", stems = "";
+    [-1, 1].forEach(function(side){
+      var d = "";
+      for (var t = 100; t <= 228; t += 4){
+        var rad = t*Math.PI/180, x = cx + r*Math.cos(rad), y = cy + r*Math.sin(rad);
+        if (side > 0) x = 64 - x;
+        d += (d ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
+      }
+      stems += '<path d="'+d+'"/>';
+      [112,131,150,169,188,207].forEach(function(t, k){
+        var rad = t*Math.PI/180, x = cx + r*Math.cos(rad), y = cy + r*Math.sin(rad);
+        var th = Math.atan2(Math.cos(rad), -Math.sin(rad))*180/Math.PI;   // tangent, moving up the arc
+        var sc = 1.05 - k*0.04;
+        [[-42, 1], [40, .72]].forEach(function(o){
+          var off = o[0], ang = th + off, px = x, s2 = (sc*o[1]).toFixed(2);
+          if (side > 0){ px = 64 - x; ang = 180 - ang; }
+          out += '<path d="'+leaf+'" transform="translate('+px.toFixed(1)+' '+y.toFixed(1)+') rotate('+ang.toFixed(0)+') scale('+s2+')"/>';
+        });
+      });
+      // tip leaf
+      var rt = 229*Math.PI/180, tx = cx + r*Math.cos(rt), ty = cy + r*Math.sin(rt);
+      var tth = Math.atan2(Math.cos(rt), -Math.sin(rt))*180/Math.PI;
+      if (side > 0){ tx = 64 - tx; tth = 180 - tth; }
+      out += '<path d="'+leaf+'" transform="translate('+tx.toFixed(1)+' '+ty.toFixed(1)+') rotate('+tth.toFixed(0)+') scale(.8)"/>';
+    });
+    return '<svg class="'+(cls||"")+'" viewBox="0 0 64 64" aria-hidden="true">'+
+      '<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+stems+'</g>'+
+      '<g fill="currentColor">'+out+'</g></svg>';
+  }
+
+  // Leafy branch for the hero corner
+  (function drawBranch(){
+    var svg = document.getElementById("branch"), out = "";
+    var stem = "M-10 20 C 60 40, 110 90, 150 170 S 200 260, 215 300";
+    out += '<path d="'+stem+'" fill="none" stroke="#5B4A33" stroke-width="3" stroke-linecap="round"/>';
+    out += '<path d="M70 58 C 90 40, 120 32, 150 34" fill="none" stroke="#5B4A33" stroke-width="2" stroke-linecap="round"/>';
+    out += '<path d="M118 120 C 140 104, 170 100, 200 108" fill="none" stroke="#5B4A33" stroke-width="2" stroke-linecap="round"/>';
+    var pts = [[20,26,30],[38,34,-20],[56,46,40],[66,64,-35],[86,62,60],[92,90,-30],[112,96,70],[118,128,-25],[132,140,75],[140,160,-20],[158,186,70],[162,210,-15],[176,230,65],[184,252,-10],
+               [92,46,-60],[108,38,-80],[126,34,-95],[146,30,-100],[160,36,-110],[140,112,-60],[158,104,-80],[178,104,-95],[196,110,-105]];
+    var greens = ["#4F8A3E","#6FA251","#3F7533","#86B463","#5C9646"];
+    pts.forEach(function(p,i){
+      var g = greens[i % greens.length];
+      out += '<g transform="translate('+p[0]+' '+p[1]+') rotate('+p[2]+')">'+
+             '<path d="M0 0 C 12 -10, 34 -10, 46 0 C 34 10, 12 10, 0 0Z" fill="'+g+'"/>'+
+             '<path d="M3 0H42" stroke="#2F5A26" stroke-width=".8" opacity=".55"/></g>';
+    });
+    svg.innerHTML = out;
+  })();
+
+  // Reuse the masthead skyline in the footer
+  (function(){
+    var src = document.querySelector(".masthead .skyline");
+    var dst = document.querySelector("footer .skyline");
+    dst.setAttribute("fill","none"); dst.setAttribute("stroke","currentColor");
+    dst.setAttribute("stroke-width","1.8"); dst.setAttribute("stroke-linejoin","round"); dst.setAttribute("stroke-linecap","round");
+    dst.innerHTML = src.innerHTML;
+  })();
+
+  /* ---------- Data ---------- */
+  var DATA = window.WITNEYS_BEST || {categories:[], awards:[]};
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  function slug(s){ return String(s||"").toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function fmtDate(ym){
+    var m = /^(\d{4})-(\d{1,2})/.exec(String(ym||""));
+    return m ? MONTHS[+m[2]-1] + " " + m[1] : esc(ym);
+  }
+  function safeLink(u){
+    u = String(u||"").trim();
+    if (!u) return "";
+    if (!/^https?:\/\//i.test(u)) u = "https://" + u;
+    return u;
+  }
+
+  var seen = {};
+  var awards = (DATA.awards || []).map(function(a, i){
+    var id = slug(a.award) || ("award-" + (i+1));
+    if (seen[id]) { id += "-" + slug(a.winner); }
+    seen[id] = true;
+    return Object.assign({}, a, { id:id, _i:i, photo: String(a.photo || "").replace(/^\/+/, "") });
+  }).sort(function(a,b){
+    var d = String(b.awarded||"").localeCompare(String(a.awarded||""));
+    return d || a._i - b._i;
+  });
+
+  var categories = (DATA.categories && DATA.categories.length) ? DATA.categories.slice()
+    : Array.from(new Set(awards.map(function(a){ return a.category; }).filter(Boolean)));
+  // Any category used in an award but not listed still gets a button
+  awards.forEach(function(a){ if (a.category && categories.indexOf(a.category) < 0) categories.push(a.category); });
+
+  /* ---------- State ---------- */
+  var state = { cat:"All", q:"" };
+  try { var saved = sessionStorage.getItem("wb-cat"); if (saved && (saved === "All" || categories.indexOf(saved) >= 0)) state.cat = saved; } catch(e){}
+
+  var grid = document.getElementById("grid");
+  var chipsEl = document.getElementById("chips");
+  var statusEl = document.getElementById("status");
+  var qEl = document.getElementById("q");
+  var clearBtn = document.getElementById("clearQ");
+
+  function countFor(cat){ return cat === "All" ? awards.length : awards.filter(function(a){ return a.category === cat; }).length; }
+
+  function renderChips(){
+    var list = ["All"].concat(categories);
+    chipsEl.innerHTML = list.map(function(c){
+      return '<button class="chip" data-cat="'+esc(c)+'" aria-pressed="'+(state.cat===c)+'">'+esc(c)+'<span class="n">'+countFor(c)+'</span></button>';
+    }).join("");
+  }
+
+  function matches(a){
+    if (state.cat !== "All" && a.category !== state.cat) return false;
+    if (!state.q) return true;
+    var hay = [a.award,a.winner,a.category,a.blurb,a.story,a.where].join(" ").toLowerCase();
+    return state.q.toLowerCase().split(/\s+/).filter(Boolean).every(function(w){ return hay.indexOf(w) >= 0; });
+  }
+
+  function photoHTML(a, eager){
+    if (a.photo) {
+      return '<img src="'+esc(a.photo)+'" alt="'+esc(a.award)+' at '+esc(a.winner)+'" '+(eager?'':'loading="lazy" ')+'decoding="async" onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'ph\',innerHTML:window.__wbPh}))">';
+    }
+    return '<div class="ph">'+laurelSVG()+'<span>Photo to follow</span></div>';
+  }
+  window.__wbPh = laurelSVG() + "<span>Photo to follow</span>";
+
+  function render(){
+    var shown = awards.filter(matches);
+    if (DATA.loadError) {
+      grid.innerHTML = '<div class="empty">'+laurelSVG()+'<h3>The awards couldn\'t be loaded</h3><p>Please try refreshing the page in a moment.</p></div>';
+      statusEl.textContent = "";
+      return;
+    }
+    if (!awards.length) {
+      grid.innerHTML = '<div class="empty">'+laurelSVG()+'<h3>The first award is coming soon</h3><p>Watch this space.</p></div>';
+      statusEl.textContent = "";
+      return;
+    }
+    if (!shown.length) {
+      var msg = state.q
+        ? '<h3>Nothing for “'+esc(state.q)+'” yet</h3><p>Maybe it\'s still waiting to be discovered. <button class="linkish" data-reset>Show all awards</button></p>'
+        : '<h3>No '+esc(state.cat)+' awards yet</h3><p>The judging continues… <button class="linkish" data-reset>Show all awards</button></p>';
+      grid.innerHTML = '<div class="empty">'+laurelSVG()+msg+'</div>';
+      statusEl.textContent = "";
+      return;
+    }
+    grid.innerHTML = shown.map(function(a, i){
+      return '<a class="card" href="#'+a.id+'" data-id="'+a.id+'" style="animation-delay:'+Math.min(i*45,360)+'ms">'+
+        '<div class="photo">'+photoHTML(a, i < 2)+'</div>'+
+        '<div class="body">'+
+          laurelSVG("laurel")+
+          '<h2>'+esc(a.award)+'</h2>'+
+          '<p class="winner">Winner: '+esc(a.winner)+'</p>'+
+          (a.blurb ? '<p class="blurb">'+esc(a.blurb)+'</p>' : '')+
+          '<div class="meta"><span>Awarded '+fmtDate(a.awarded)+'</span>'+(a.category?'<span class="cat">'+esc(a.category)+'</span>':'')+'</div>'+
+        '</div></a>';
+    }).join("");
+    var label = state.cat === "All" ? "awards" : state.cat.toLowerCase() + " awards";
+    statusEl.textContent = (state.q || state.cat !== "All")
+      ? "Showing " + shown.length + " of " + awards.length + " awards"
+      : awards.length + " " + (awards.length === 1 ? "award" : label) + " so far";
+  }
+
+  chipsEl.addEventListener("click", function(e){
+    var b = e.target.closest(".chip"); if (!b) return;
+    state.cat = b.getAttribute("data-cat");
+    try { sessionStorage.setItem("wb-cat", state.cat); } catch(err){}
+    renderChips(); render();
+    b = chipsEl.querySelector('[data-cat="'+CSS.escape(state.cat)+'"]');
+    if (b && b.scrollIntoView) b.scrollIntoView({block:"nearest", inline:"center", behavior:"smooth"});
+  });
+  qEl.addEventListener("input", function(){
+    state.q = qEl.value.trim();
+    clearBtn.classList.toggle("show", !!qEl.value);
+    render();
+  });
+  clearBtn.addEventListener("click", function(){ qEl.value = ""; state.q = ""; clearBtn.classList.remove("show"); render(); qEl.focus(); });
+  grid.addEventListener("click", function(e){
+    if (e.target.closest("[data-reset]")) {
+      state.cat = "All"; state.q = ""; qEl.value = ""; clearBtn.classList.remove("show");
+      try { sessionStorage.setItem("wb-cat","All"); } catch(err){}
+      renderChips(); render();
+    }
+  });
+  document.getElementById("searchBtn").addEventListener("click", function(){
+    document.getElementById("controls").scrollIntoView({behavior:"smooth", block:"start"});
+    setTimeout(function(){ qEl.focus({preventScroll:true}); }, 350);
+  });
+
+  // Hairline under the sticky bar once it sticks
+  var controls = document.getElementById("controls");
+  if ("IntersectionObserver" in window) {
+    var sentinel = document.createElement("div"); sentinel.style.height = "1px";
+    controls.parentNode.insertBefore(sentinel, controls);
+    new IntersectionObserver(function(en){ controls.classList.toggle("stuck", !en[0].isIntersecting); }).observe(sentinel);
+  }
+
+  /* ---------- Detail panel (shareable via #award-name) ---------- */
+  var overlay = document.getElementById("overlay");
+  var panel = document.getElementById("panel");
+  var lastFocus = null;
+
+  var closeBtn = '<button class="close" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';
+
+  function openPanel(html){
+    lastFocus = document.activeElement;
+    panel.innerHTML = closeBtn + html;
+    panel.scrollTop = 0;
+    overlay.classList.add("open"); overlay.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(function(){ overlay.classList.add("show"); panel.querySelector("[data-close]").focus(); });
+  }
+  function closePanel(fromHash){
+    if (!overlay.classList.contains("open")) return;
+    overlay.classList.remove("show");
+    setTimeout(function(){ overlay.classList.remove("open"); overlay.setAttribute("aria-hidden","true"); }, 200);
+    document.body.style.overflow = "";
+    if (!fromHash && location.hash) {
+      try { history.replaceState(null, "", location.pathname + location.search); } catch(e){ location.hash = ""; }
+    }
+    if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+  }
+
+  function awardPanel(a){
+    var rows = "";
+    rows += '<dt>Category</dt><dd>'+esc(a.category||"—")+'</dd>';
+    rows += '<dt>Awarded</dt><dd>'+fmtDate(a.awarded)+'</dd>';
+    if (a.where) rows += '<dt>Where</dt><dd>'+esc(a.where)+', Witney</dd>';
+    var link = safeLink(a.link);
+    if (link) rows += '<dt>Find them</dt><dd><a href="'+esc(link)+'" target="_blank" rel="noopener">'+esc(link.replace(/^https?:\/\/(www\.)?/i,"").replace(/\/$/,""))+'</a></dd>';
+    return '<div class="hero-img">'+photoHTML(a, true)+'</div>'+
+      '<div class="content">'+
+        '<div class="eyebrow">'+laurelSVG()+'Witney\'s Best · '+fmtDate(a.awarded)+'</div>'+
+        '<h2 id="panelTitle">'+esc(a.award)+'</h2>'+
+        '<p class="winner">Winner: '+esc(a.winner)+'</p>'+
+        '<p class="story">'+esc(a.story || a.blurb || "")+'</p>'+
+        '<dl>'+rows+'</dl>'+
+      '</div>';
+  }
+
+  function aboutPanel(){
+    var latest = awards[0] ? fmtDate(awards[0].awarded) : "";
+    return '<div class="content about">'+
+      '<div class="eyebrow">'+laurelSVG()+'About</div>'+
+      '<h2 id="panelTitle">What is Witney\'s Best?</h2>'+
+      '<p>A light-hearted, entirely personal set of awards for the things that make Witney a good place to eat, drink, sit, shop and wander. Each one is discovered in person, one at a time.</p>'+
+      '<p>There\'s no panel, no shortlist and nothing to pay. If something here is yours, congratulations — you\'ve earned it.</p>'+
+      '<dl><dt>Awards so far</dt><dd>'+awards.length+'</dd>'+(latest?'<dt>Latest</dt><dd>'+latest+'</dd>':'')+
+      '<dt>Categories</dt><dd>'+categories.map(esc).join(", ")+'</dd></dl>'+
+    '</div>';
+  }
+
+  function fromHash(){
+    var h = decodeURIComponent((location.hash || "").slice(1));
+    if (!h) { closePanel(true); return; }
+    if (h === "about") { openPanel(aboutPanel()); return; }
+    var a = awards.find(function(x){ return x.id === h; });
+    if (a) openPanel(awardPanel(a)); else closePanel(true);
+  }
+  window.addEventListener("hashchange", fromHash);
+
+  overlay.addEventListener("click", function(e){
+    if (e.target === overlay || e.target.closest("[data-close]")) closePanel(false);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape") closePanel(false);
+    if (e.key === "Tab" && overlay.classList.contains("open")) {
+      var f = panel.querySelectorAll('button,a[href]'); if (!f.length) return;
+      var first = f[0], last = f[f.length-1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  document.getElementById("menuBtn").addEventListener("click", function(){ location.hash = "about"; });
+
+  if (window.matchMedia && matchMedia("(max-width:480px)").matches) qEl.placeholder = "Search awards or businesses…";
+
+  /* ---------- Go ---------- */
+  document.getElementById("footnote").textContent = "© " + new Date().getFullYear() + " Witney's Best";
+  renderChips(); render(); fromHash();
+}
+
+fetch("data/awards.json", { cache: "no-cache" })
+  .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(function(list){
+    window.WITNEYS_BEST = { categories: CATEGORY_ORDER, awards: Array.isArray(list) ? list : (list.awards || []) };
+    startWitneysBest();
+  })
+  .catch(function(){
+    window.WITNEYS_BEST = { categories: CATEGORY_ORDER, awards: [], loadError: true };
+    startWitneysBest();
+  });
+</script>
+</body>
+</html>

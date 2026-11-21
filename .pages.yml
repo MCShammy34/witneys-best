@@ -1,0 +1,70 @@
+# Pages CMS settings for Witney's Best
+# This tells Pages CMS (pagescms.org) what an award looks like,
+# so you get a simple form instead of editing code.
+
+media:
+  input: photos
+  output: /photos
+  rename: safe
+  categories: [image]
+
+content:
+  - name: awards
+    label: Awards
+    type: file
+    path: data/awards.json
+    format: json
+    list: true
+    fields:
+      - name: award
+        label: Award
+        type: string
+        required: true
+        description: e.g. Best Flat White
+
+      - name: winner
+        label: Winner
+        type: string
+        required: true
+        description: The business that won it
+
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values: [Food, Drink, Interiors, Sweet, Outdoor]
+
+      - name: awarded
+        label: Date awarded
+        type: date
+        required: true
+        description: The site shows the month and year. Newest awards appear first.
+        options:
+          format: yyyy-MM-dd
+
+      - name: blurb
+        label: Card blurb
+        type: text
+        required: true
+        description: One or two short sentences shown on the card
+
+      - name: photo
+        label: Photo
+        type: image
+        description: Optional. A landscape photo works best. Leave empty for a laurel placeholder.
+
+      - name: story
+        label: Longer write-up
+        type: text
+        description: Optional. Shown when someone taps the card. If empty, the blurb is used.
+
+      - name: where
+        label: Where
+        type: string
+        description: Optional street or location, e.g. Market Square
+
+      - name: link
+        label: Website or Instagram
+        type: string
+        description: Optional, e.g. https://www.instagram.com/yourfavouritecafe
