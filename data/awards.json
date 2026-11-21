@@ -6,9 +6,7 @@
     "awarded": "2026-11-18",
     "blurb": "A properly generous, flavour-packed sandwich that gets the balance just right.",
     "photo": "/photos/chicken-sandwich.jpg",
-    "story": "Crisp, well-seasoned chicken, a soft seeded bun that holds together to the last bite, and just enough pickled onion to cut through the richness. The sort of lunch you start planning the next one of before you've finished.",
-    "where": "",
-    "link": ""
+    "story": "Crisp, well-seasoned chicken, a soft seeded bun that holds together to the last bite, and just enough pickled onion to cut through the richness. The sort of lunch you start planning the next one of before you've finished."
   },
   {
     "award": "Best Restaurant Seating",
@@ -18,8 +16,7 @@
     "blurb": "A beautiful, relaxed setting that makes dining out in Witney feel extra special.",
     "photo": "/photos/fleece-seating.jpg",
     "story": "Honey-coloured stone, climbing greenery and tables with room to breathe. On a warm evening there are few better places in town to sit and watch the light go.",
-    "where": "Church Green",
-    "link": ""
+    "where": "Church Green"
   },
   {
     "award": "Best Decaf Tea",
@@ -28,9 +25,7 @@
     "awarded": "2026-11-18",
     "blurb": "A wonderfully smooth decaf with full flavour — the perfect, comforting brew.",
     "photo": "/photos/decaf-tea.jpg",
-    "story": "Decaf is usually an afterthought. Here it gets the same care as everything else on the menu: properly brewed, full-bodied and served in very nice china. A scone on the side is strongly advised.",
-    "where": "",
-    "link": ""
+    "story": "Decaf is usually an afterthought. Here it gets the same care as everything else on the menu: properly brewed, full-bodied and served in very nice china. A scone on the side is strongly advised."
   },
   {
     "award": "Best Margherita Pizza",
@@ -39,9 +34,7 @@
     "awarded": "2026-11-18",
     "blurb": "A simple classic done brilliantly — light, chewy and bursting with flavour.",
     "photo": "/photos/margherita.jpg",
-    "story": "Nowhere to hide with a margherita, and this one doesn't need to. Leopard-spotted crust, bright tomato, good mozzarella and basil added at the right moment.",
-    "where": "",
-    "link": ""
+    "story": "Nowhere to hide with a margherita, and this one doesn't need to. Leopard-spotted crust, bright tomato, good mozzarella and basil added at the right moment."
   },
   {
     "award": "Best Smash Burger",
@@ -50,8 +43,15 @@
     "awarded": "2026-11-18",
     "blurb": "Crispy-edged, juicy and full of flavour — a smash burger done properly.",
     "photo": "/photos/smash-burger.jpg",
-    "story": "Lacy, caramelised edges, properly melted cheese, sharp pickles and a glossy bun that's up to the job. Get the fries.",
-    "where": "",
-    "link": ""
+    "story": "Lacy, caramelised edges, properly melted cheese, sharp pickles and a glossy bun that's up to the job. Get the fries."
+  },
+  {
+    "award": "Best Mushrooms on Toast",
+    "winner": "The Edge",
+    "category": "Food",
+    "awarded": "2026-11-21",
+    "blurb": "Creamy mushrooms on toasted sourdough with pickle and crispy bacon. Delicious!",
+    "photo": "/photos/witneys-best.png",
+    "story": "Creamy mushrooms on toasted sourdough with pickle and crispy bacon. Delicious food and warm welcoming service."
   }
 ]
