@@ -53,5 +53,14 @@
     "blurb": "Creamy mushrooms on toasted sourdough with pickle and crispy bacon. Delicious!",
     "photo": "/photos/witneys-best.png",
     "story": "Creamy mushrooms on toasted sourdough with pickle and crispy bacon. Delicious food and warm welcoming service."
+  },
+  {
+    "award": "Best Pub Loo Door",
+    "winner": "The Eagle Tavern",
+    "category": "Interiors",
+    "awarded": "2026-11-22",
+    "blurb": "Lovely retro, slightly cheeky, door panel that greets you on the way to the Gents loo.",
+    "photo": "/photos/witneys-best-1.png",
+    "story": "Lovely retro, slightly cheeky, door panel that greets you on the way to the Gents loo."
   }
 ]
