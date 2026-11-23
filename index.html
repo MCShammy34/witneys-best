@@ -40,15 +40,18 @@
   .hero{position:relative;overflow:hidden;padding:18px 20px 34px}
   .topbar{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;max-width:1160px;margin:0 auto}
   .icon-btn{width:44px;height:44px;display:grid;place-items:center;border:0;background:transparent;border-radius:12px;cursor:pointer;color:var(--ink)}
-  .icon-btn:hover{background:rgba(47,94,53,.08)}
-  @media (max-width:640px){#menuBtn{background:rgba(251,247,240,.82)}}
+  .icon-btn{background:rgba(251,247,240,.8);border-radius:50%}
+  .icon-btn:hover{background:#EEF1E6}
   .icon-btn svg{width:26px;height:26px}
 
-  .branch{position:absolute;left:-30px;top:-20px;width:260px;height:auto;z-index:1;pointer-events:none}
-  .cottage{position:absolute;right:-40px;top:70px;width:280px;height:auto;z-index:1;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent 98%);mask-image:linear-gradient(to bottom,#000 62%,transparent 98%)}
+  .branch,.cottage{position:absolute;top:0;height:auto;z-index:1;pointer-events:none;user-select:none}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(rgba(251,247,240,0),var(--cream));z-index:1;pointer-events:none}
+  .branch{left:0;width:230px}
+  .cottage{right:0;width:230px;-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent 99%);mask-image:linear-gradient(to bottom,#000 70%,transparent 99%)}
+  .masthead h1,.masthead .tagline,.masthead .intro{text-shadow:0 0 3px var(--cream),0 0 10px var(--cream),0 0 18px var(--cream)}
 
   .masthead{position:relative;z-index:2;text-align:center;max-width:620px;margin:-26px auto 0}
-  .skyline{display:block;width:200px;height:auto;margin:0 auto 6px;color:var(--green)}
+  .skyline{display:block;width:200px;height:auto;margin:0 auto 6px}
   h1{font-family:var(--serif);font-weight:750;font-size:clamp(2.6rem,7.2vw,4.2rem);line-height:1.02;letter-spacing:-.02em;margin:0;font-variation-settings:"opsz" 120}
   .h1-wrap{position:relative;display:inline-block}
   .h1-wrap .spark{position:absolute;right:-30px;top:-12px;width:30px;color:var(--green-mid)}
@@ -157,17 +160,17 @@
 
   /* ---------- Responsive hero ---------- */
   @media (min-width:1100px){
-    .branch{width:320px;left:-10px}
-    .cottage{width:320px;right:-10px;top:64px}
+    .branch,.cottage{width:270px}
   }
   @media (max-width:860px){
-    .cottage{width:200px;right:-70px;top:80px;opacity:.9}
-    .branch{width:190px;left:-50px}
+    .branch,.cottage{width:180px}
+    .intro{max-width:min(31em,calc(100vw - 340px))}
   }
   @media (max-width:640px){
     .hero{padding:10px 16px 22px}
-    .branch{width:150px;left:-38px;top:-22px;opacity:.9}
-    .cottage{display:none}
+    .branch{width:25vw;left:-2vw}
+    .cottage{width:24vw}
+    h1{font-size:2.3rem}
     .masthead{margin-top:-30px;padding:0 6px}
     .skyline{width:150px}
     .tagline::before,.tagline::after{width:28px}
@@ -182,54 +185,8 @@
 <body>
 
 <header class="hero">
-  <svg class="branch" id="branch" viewBox="0 0 300 300" aria-hidden="true"></svg>
-  <svg class="cottage" viewBox="0 0 360 300" aria-hidden="true">
-    <defs>
-      <pattern id="stones" width="28" height="14" patternUnits="userSpaceOnUse">
-        <rect width="28" height="14" fill="#D9C39A"/>
-        <path d="M0 13.5H28M14 0V7M0 7H28M4 7v7M22 7v7" stroke="#C4AC80" stroke-width="1" fill="none" opacity=".75"/>
-      </pattern>
-      <linearGradient id="fadeL" x1="0" x2="1">
-        <stop offset="0" stop-color="#FBF7F0" stop-opacity="1"/>
-        <stop offset=".22" stop-color="#FBF7F0" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="fadeB" x1="0" y1="0" x2="0" y2="1">
-        <stop offset=".72" stop-color="#FBF7F0" stop-opacity="0"/>
-        <stop offset="1" stop-color="#FBF7F0" stop-opacity="1"/>
-      </linearGradient>
-    </defs>
-    <!-- chimney -->
-    <rect x="236" y="8" width="34" height="62" fill="url(#stones)"/>
-    <rect x="232" y="4" width="42" height="8" fill="#BFA77B"/>
-    <rect x="240" y="-6" width="10" height="12" fill="#A87A5A"/><rect x="256" y="-6" width="10" height="12" fill="#A87A5A"/>
-    <!-- roof -->
-    <path d="M70 120 L200 30 L380 30 L380 120 Z" fill="#8A8476"/>
-    <path d="M70 120 L200 30 L330 120 Z" fill="#9A9486"/>
-    <g stroke="#7B7568" stroke-width="1" opacity=".6">
-      <path d="M95 103H305M120 86H281M145 69H256M170 52H232"/>
-    </g>
-    <!-- gable wall -->
-    <path d="M86 120 L200 42 L314 120 L314 310 L86 310 Z" fill="url(#stones)"/>
-    <path d="M314 120 L380 120 L380 310 L314 310Z" fill="url(#stones)" opacity=".85"/>
-    <path d="M80 122 L200 38 L320 122" fill="none" stroke="#C9B286" stroke-width="7" stroke-linejoin="round"/>
-    <!-- windows -->
-    <g>
-      <rect x="168" y="80" width="64" height="40" fill="#EDE6D6" stroke="#B9A076" stroke-width="5"/>
-      <path d="M200 80V120M168 100H232" stroke="#F8F5EE" stroke-width="3"/>
-      <rect x="120" y="150" width="56" height="78" fill="#EDE6D6" stroke="#B9A076" stroke-width="5"/>
-      <path d="M148 150V228M120 176H176M120 202H176" stroke="#FFFFFF" stroke-width="3"/>
-      <rect x="226" y="150" width="56" height="78" fill="#EDE6D6" stroke="#B9A076" stroke-width="5"/>
-      <path d="M254 150V228M226 176H282M226 202H282" stroke="#FFFFFF" stroke-width="3"/>
-      <rect x="326" y="150" width="46" height="78" fill="#EDE6D6" stroke="#B9A076" stroke-width="5"/>
-      <path d="M349 150V228M326 189H372" stroke="#FFFFFF" stroke-width="3"/>
-      <rect x="114" y="228" width="68" height="7" fill="#C9B286"/><rect x="220" y="228" width="68" height="7" fill="#C9B286"/>
-    </g>
-    <!-- ivy -->
-    <g fill="#5E8B54">
-      <circle cx="96" cy="250" r="7"/><circle cx="104" cy="262" r="8"/><circle cx="92" cy="272" r="7"/><circle cx="106" cy="282" r="9"/><circle cx="96" cy="292" r="8"/>
-      <circle cx="112" cy="244" r="5" fill="#7AA36C"/><circle cx="88" cy="258" r="5" fill="#7AA36C"/>
-    </g>
-  </svg>
+  <img class="branch" src="images/branch.webp" alt="" aria-hidden="true">
+  <img class="cottage" src="images/cottage.webp" alt="" aria-hidden="true">
 
   <div class="topbar">
     <button class="icon-btn" id="menuBtn" aria-label="About Witney's Best">
@@ -241,29 +198,7 @@
   </div>
 
   <div class="masthead">
-    <svg class="skyline" viewBox="0 0 220 76" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
-      <!-- trees -->
-      <g fill="#DCE6D0"><path d="M18 70c-9 0-14-7-11-15-5-6 0-15 7-15 1-8 13-10 17-3 8-1 12 8 8 14 4 7-2 16-10 15"/><path d="M200 70c9 0 14-7 11-15 5-6 0-15-7-15-1-8-13-10-17-3-8-1-12 8-8 14-4 7 2 16 10 15"/></g>
-      <path d="M22 70V58M196 70V58"/>
-      <!-- houses left -->
-      <g fill="#EEF2E7">
-        <path d="M38 70V46l13-12 13 12v24"/>
-        <path d="M64 70V50h22v20"/><path d="M62 50l13-10 13 10"/>
-        <path d="M86 70V44l9-9 9 9v26"/>
-      </g>
-      <path d="M44 52h5v6h-5zM54 52h5v6h-5zM44 62h5v5h-5zM70 56h5v5h-5zM78 56h4v5h-4zM92 50h5v6h-5zM92 60h5v10"/>
-      <!-- church -->
-      <g fill="#EEF2E7"><path d="M104 70V34h14v36"/><path d="M104 34l7-6 7 6"/><path d="M111 28V4"/></g>
-      <path d="M111 4l-3 6M111 4l3 6M108 18h6M109 42h4v7h-4zM107 58h8v12"/>
-      <g fill="#EEF2E7"><path d="M118 70V48h18v22"/><path d="M116 48l11-9 11 9"/></g>
-      <!-- houses right -->
-      <g fill="#EEF2E7">
-        <path d="M136 70V44l11-10 11 10v26"/>
-        <path d="M158 70V50h24v20"/><path d="M156 50l14-10 14 10"/>
-      </g>
-      <path d="M122 54h5v6h-5zM130 54h3v6M141 50h5v6h-5zM141 60h5v10M163 56h5v5h-5zM172 56h5v5h-5zM166 47v-6M176 47v-6"/>
-      <path d="M2 70.5h216" stroke-width="2"/>
-    </svg>
+    <img class="skyline" src="images/skyline.webp" alt="" aria-hidden="true">
     <div class="h1-wrap">
       <h1>Witney's Best</h1>
       <svg class="spark" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 12 4 4M13 13l6-8M15 20l9-2"/></svg>
@@ -291,7 +226,7 @@
 </main>
 
 <footer>
-  <svg class="skyline" viewBox="0 0 220 76" aria-hidden="true" style="color:var(--green)"><use href="#none"/></svg>
+  <img class="skyline" src="images/skyline.webp" alt="" aria-hidden="true">
   <p>Witney's Best is an independent, unofficial celebration. No sponsorship, no fees, no entry forms — just good things, found one at a time.</p>
   <small id="footnote"></small>
 </footer>
@@ -343,34 +278,6 @@ function startWitneysBest(){
       '<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+stems+'</g>'+
       '<g fill="currentColor">'+out+'</g></svg>';
   }
-
-  // Leafy branch for the hero corner
-  (function drawBranch(){
-    var svg = document.getElementById("branch"), out = "";
-    var stem = "M-10 20 C 60 40, 110 90, 150 170 S 200 260, 215 300";
-    out += '<path d="'+stem+'" fill="none" stroke="#5B4A33" stroke-width="3" stroke-linecap="round"/>';
-    out += '<path d="M70 58 C 90 40, 120 32, 150 34" fill="none" stroke="#5B4A33" stroke-width="2" stroke-linecap="round"/>';
-    out += '<path d="M118 120 C 140 104, 170 100, 200 108" fill="none" stroke="#5B4A33" stroke-width="2" stroke-linecap="round"/>';
-    var pts = [[20,26,30],[38,34,-20],[56,46,40],[66,64,-35],[86,62,60],[92,90,-30],[112,96,70],[118,128,-25],[132,140,75],[140,160,-20],[158,186,70],[162,210,-15],[176,230,65],[184,252,-10],
-               [92,46,-60],[108,38,-80],[126,34,-95],[146,30,-100],[160,36,-110],[140,112,-60],[158,104,-80],[178,104,-95],[196,110,-105]];
-    var greens = ["#4F8A3E","#6FA251","#3F7533","#86B463","#5C9646"];
-    pts.forEach(function(p,i){
-      var g = greens[i % greens.length];
-      out += '<g transform="translate('+p[0]+' '+p[1]+') rotate('+p[2]+')">'+
-             '<path d="M0 0 C 12 -10, 34 -10, 46 0 C 34 10, 12 10, 0 0Z" fill="'+g+'"/>'+
-             '<path d="M3 0H42" stroke="#2F5A26" stroke-width=".8" opacity=".55"/></g>';
-    });
-    svg.innerHTML = out;
-  })();
-
-  // Reuse the masthead skyline in the footer
-  (function(){
-    var src = document.querySelector(".masthead .skyline");
-    var dst = document.querySelector("footer .skyline");
-    dst.setAttribute("fill","none"); dst.setAttribute("stroke","currentColor");
-    dst.setAttribute("stroke-width","1.8"); dst.setAttribute("stroke-linejoin","round"); dst.setAttribute("stroke-linecap","round");
-    dst.innerHTML = src.innerHTML;
-  })();
 
   /* ---------- Data ---------- */
   var DATA = window.WITNEYS_BEST || {categories:[], awards:[]};
