@@ -1,15 +1,5 @@
 [
   {
-    "award": "Best Restaurant Seating",
-    "winner": "The Fleece",
-    "category": "Outdoor",
-    "awarded": "2026-11-18",
-    "blurb": "A beautiful, relaxed setting that makes dining out in Witney feel extra special.",
-    "photo": "/photos/fleece-seating.jpg",
-    "story": "Honey-coloured stone, climbing greenery and tables with room to breathe. On a warm evening there are few better places in town to sit and watch the light go.",
-    "where": "Church Green"
-  },
-  {
     "award": "Best Decaf Tea",
     "winner": "The Old Tearooms",
     "category": "Drink",
@@ -62,5 +52,14 @@
     "blurb": "Huge fluffy jacket potato covered in awesome garlic mushrooms and crispy onions.",
     "photo": "/photos/witneys-best-5-1.png",
     "story": "Huge fluffy jacket potato covered in awesome garlic mushrooms and crispy onions."
+  },
+  {
+    "award": "Best Truffle and Parmesan Hash Browns",
+    "winner": "Blakes Kitchen",
+    "category": "Food",
+    "awarded": "2026-11-24",
+    "blurb": "Homemade, crunchy and dense, almost a meal in themselves.",
+    "photo": "/photos/witneys-best-7.png",
+    "story": "Homemade, crunchy and dense, almost a meal in themselves."
   }
 ]
