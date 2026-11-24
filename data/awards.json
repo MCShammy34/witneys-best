@@ -1,14 +1,5 @@
 [
   {
-    "award": "Best Chicken Sandwich",
-    "winner": "The Deli at Witney",
-    "category": "Food",
-    "awarded": "2026-11-18",
-    "blurb": "A properly generous, flavour-packed sandwich that gets the balance just right.",
-    "photo": "/photos/chicken-sandwich.jpg",
-    "story": "Crisp, well-seasoned chicken, a soft seeded bun that holds together to the last bite, and just enough pickled onion to cut through the richness. The sort of lunch you start planning the next one of before you've finished."
-  },
-  {
     "award": "Best Restaurant Seating",
     "winner": "The Fleece",
     "category": "Outdoor",
@@ -53,5 +44,14 @@
     "blurb": "Lovely retro, slightly cheeky, door panel that greets you on the way to the Gents loo.",
     "photo": "/photos/witneys-best-1.png",
     "story": "Lovely retro, slightly cheeky, door panel that greets you on the way to the Gents loo."
+  },
+  {
+    "award": "Best Viral Toasted Sandwich",
+    "winner": "Blake's Kitchen",
+    "category": "Food",
+    "awarded": "2026-11-24",
+    "blurb": "The Roastie Toastie - an entire hot roast chicken dinner inside a toasted sandwich!",
+    "photo": "/photos/img-20261018-wa0000.jpg",
+    "story": "The Roastie Toastie - a hot roast chicken dinner in a toasted sandwich! Delicious, with top class roast potatoes and super dunkable chicken gravy."
   }
 ]
